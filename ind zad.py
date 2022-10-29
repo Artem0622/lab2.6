@@ -16,7 +16,7 @@ if __name__ == '__main__':
             # Запросить данные о студентах.
             name = input("Фамилия и инициалы? ")
             number = input("Номер группы? ")
-            marks = str(input("Успеваемость? "))
+            marks = list(map(int,input("Успеваемость").split()))
             # Создать словарь.
             student = {
                 'name': name,
@@ -53,7 +53,8 @@ if __name__ == '__main__':
                         idx,
                         worker.get('name', ''),
                         worker.get('number', ''),
-                        worker.get('marks', 0)
+                        ' '.join([str(x) for x in worker.get('marks', 0)])
+
                     )
                 )
             print(line)
@@ -63,8 +64,7 @@ if __name__ == '__main__':
             count = 0
             # Проверить студентов хотя бы на одну оценку.
             for student in students:
-                marks = list(map(int, student.get('marks', '').split()))
-                if "2" in student.get('marks', ''):
+                if 2 in student.get('marks', []):
                     count -= 1
                     print(
                         '{:>4} {}'.format('*', student.get('name', '')),
